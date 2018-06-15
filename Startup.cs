@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using vega.Models;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace vega
 {
@@ -24,7 +25,7 @@ namespace vega
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<VegaContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
-
+            services.AddAutoMapper();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
