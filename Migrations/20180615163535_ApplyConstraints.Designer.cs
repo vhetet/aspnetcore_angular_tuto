@@ -9,8 +9,8 @@ using vega.Models;
 namespace vega.Migrations
 {
     [DbContext(typeof(VegaContext))]
-    [Migration("20180615143303_PopulateCarModel")]
-    partial class PopulateCarModel
+    [Migration("20180615163535_ApplyConstraints")]
+    partial class ApplyConstraints
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,11 +26,17 @@ namespace vega.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name");
+                    b.Property<int>("MakeId");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255);
 
                     b.HasKey("Id");
 
-                    b.ToTable("CarModel");
+                    b.HasIndex("MakeId");
+
+                    b.ToTable("CarModels");
                 });
 
             modelBuilder.Entity("vega.Models.Feature", b =>
@@ -52,22 +58,16 @@ namespace vega.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CarModelId");
-
-                    b.Property<string>("Name");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("CarModelId");
 
                     b.ToTable("Makes");
                 });
 
-            modelBuilder.Entity("vega.Models.Make", b =>
+            modelBuilder.Entity("vega.Models.CarModel", b =>
                 {
-                    b.HasOne("vega.Models.CarModel", "CarModel")
-                        .WithMany()
-                        .HasForeignKey("CarModelId")
+                    b.HasOne("vega.Models.Make", "Make")
+                        .WithMany("CarModels")
+                        .HasForeignKey("MakeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
