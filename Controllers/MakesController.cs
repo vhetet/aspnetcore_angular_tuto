@@ -9,19 +9,19 @@ using vega.Models;
 namespace vega.Controllers
 {
     [Route("api/[controller]")]
-    public class MakeController
+    public class MakesController
     {
         private VegaContext context { get; }
         private IMapper mapper { get; }
 
     
-        public MakeController(VegaContext context, IMapper mapper)
+        public MakesController(VegaContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
         }
 
-        [HttpGet("[action]")]
+        [HttpGet("/api/makes")]
         public ActionResult Index(){
             var makes = context.Makes.Include(m => m.CarModels).ToList();
             var mapMakes = Mapper.Map<List<Make>, List<MakeResource>>(makes);

@@ -5,15 +5,15 @@ using vega.Models;
 namespace vega.Controllers
 {
     [Route("api/[controller]")]
-    public class FeatureController
+    public class FeaturesController
     {
         private readonly VegaContext _context;
 
-        public FeatureController(VegaContext context) {
+        public FeaturesController(VegaContext context) {
             _context = context;
         }
 
-        [HttpGet("[action]")]
+        [HttpGet("/api/features")]
         public IActionResult Index() {
             _context.Features.ToList();
             

@@ -8,11 +8,11 @@ export class VehicleService {
   constructor(private http: HttpClient) { }
 
   getMakes() {
-    return this.http.get('/api/make/index');
+    return this.http.get('/api/makes');
   }
 
   getFeatures() {
-    return this.http.get('/api/feature/index');
+    return this.http.get('/api/features');
   }
 
 }
