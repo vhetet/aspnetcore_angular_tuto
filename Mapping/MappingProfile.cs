@@ -12,14 +12,22 @@ namespace vega.Mapping
         {
             // Domain to API Resource
             CreateMap<Make, MakeResource>();
-            CreateMap<CarModel, CarModelResource>();
+            CreateMap<Make, KeyValuePairResource>();
+            CreateMap<CarModel, KeyValuePairResource>();
+            CreateMap<Vehicle, SaveVehicleResource>()
+                .ForMember(v => v.ModelId, opt => opt.Ignore())
+                .ForMember(v => v.Contact, opt => opt.Ignore())
+                .ForMember(v => v.Features, opt => opt.Ignore());
+                // .ForMember(vr => vr.Contact, opt => opt.MapFrom(v => new ContactResource { Name = v.ContactName, Email = v.ContactEmail, Phone = v.ContactPhone}))
+                // .ForMember(vr => vr.Features, opt => opt.MapFrom(v => v.Features.Select(vf => vf.FeatureId)));
             CreateMap<Vehicle, VehicleResource>()
+                .ForMember(vr => vr.Make, opt => opt.MapFrom(v => v.Model.Make))
                 .ForMember(vr => vr.Contact, opt => opt.MapFrom(v => new ContactResource { Name = v.ContactName, Email = v.ContactEmail, Phone = v.ContactPhone}))
-                .ForMember(vr => vr.Features, opt => opt.MapFrom(v => v.Features.Select(vf => vf.FeatureId)));
+                .ForMember(vr => vr.Features, opt => opt.MapFrom(v => v.Features.Select(vf => new KeyValuePairResource { Id = vf.Feature.Id, Name = vf.Feature.FeatureName })));
 
             // API Resource to Domain
-            CreateMap<VehicleResource, Vehicle>(MemberList.None)
-                .ForMember(v => v.Id, opt => opt.Ignore())
+            CreateMap<SaveVehicleResource, Vehicle>()
+                // .ForMember(v => v.Id, opt => opt.MapFrom(vr => vr.id))
                 .ForMember(v => v.ContactName, opt => opt.MapFrom(vr => vr.Contact.Name))
                 .ForMember(v => v.ContactEmail, opt => opt.MapFrom(vr => vr.Contact.Email))
                 .ForMember(v => v.ContactPhone, opt => opt.MapFrom(vr => vr.Contact.Phone))

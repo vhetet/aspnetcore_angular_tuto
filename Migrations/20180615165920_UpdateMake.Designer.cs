@@ -5,10 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using vega.Models;
+using vega.Persistence;
 
 namespace vega.Migrations
 {
-    [DbContext(typeof(VegaContext))]
+    [DbContext(typeof(VegaDbContext))]
     [Migration("20180615165920_UpdateMake")]
     partial class UpdateMake
     {

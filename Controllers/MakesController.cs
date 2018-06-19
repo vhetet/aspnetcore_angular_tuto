@@ -5,17 +5,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using vega.Controllers.Resources;
 using vega.Models;
+using vega.Persistence;
 
 namespace vega.Controllers
 {
     [Route("api/[controller]")]
     public class MakesController
     {
-        private VegaContext context { get; }
+        private VegaDbContext context { get; }
         private IMapper mapper { get; }
 
     
-        public MakesController(VegaContext context, IMapper mapper)
+        public MakesController(VegaDbContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;

@@ -4,15 +4,13 @@ using vega.Models;
 
 namespace vega.Controllers.Resources
 {
-    public class MakeResource
+    public class MakeResource : KeyValuePairResource
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public ICollection<CarModelResource> CarModels { get; set; }
+        public ICollection<KeyValuePairResource> CarModels { get; set; }
 
         public MakeResource()
         {
-            CarModels = new Collection<CarModelResource>();
+            CarModels = new Collection<KeyValuePairResource>();
         }
     }
 }

@@ -1,15 +1,16 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using vega.Models;
 
-namespace vega.Models
+namespace vega.Persistence
 {
-    public class VegaContext : DbContext
+    public class VegaDbContext : DbContext
     {
         public DbSet<Feature> Features { get; set; }
         public DbSet<Make> Makes { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
 
-        public VegaContext(DbContextOptions<VegaContext> options)
+        public VegaDbContext(DbContextOptions<VegaDbContext> options)
             : base(options)
         { }
 

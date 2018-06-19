@@ -1,15 +1,17 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using vega.Models;
+using vega.Persistence;
 
 namespace vega.Controllers
 {
     [Route("api/[controller]")]
     public class FeaturesController
     {
-        private readonly VegaContext _context;
 
-        public FeaturesController(VegaContext context) {
+        private readonly VegaDbContext _context;
+
+        public FeaturesController(VegaDbContext context) {
             _context = context;
         }
 
