@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using vega.Models;
-using vega.Persistence;
+using Vega.Models;
+using Vega.Persistence;
 
-namespace vega.Migrations
+namespace Vega.Migrations
 {
     [DbContext(typeof(VegaDbContext))]
     [Migration("20180614204843_InitialCreateAddFeature")]
@@ -21,7 +21,7 @@ namespace vega.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("vega.Models.Feature", b =>
+            modelBuilder.Entity("Vega.Models.Feature", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

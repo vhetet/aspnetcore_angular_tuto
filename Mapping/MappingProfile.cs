@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using vega.Controllers.Resources;
-using vega.Models;
+using Vega.Controllers.Resources;
+using Vega.Models;
 
-namespace vega.Mapping
+namespace Vega.Mapping
 {
     public class MappingProfile : Profile
     {

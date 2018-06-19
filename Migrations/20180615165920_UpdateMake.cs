@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace vega.Migrations
+namespace Vega.Migrations
 {
     public partial class UpdateMake : Migration
     {

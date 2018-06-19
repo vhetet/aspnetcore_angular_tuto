@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace vega.Models
+namespace Vega.Models
 {
     [Table("VehicleFeatures")]
     public class VehicleFeature

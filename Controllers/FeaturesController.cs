@@ -1,9 +1,9 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using vega.Models;
-using vega.Persistence;
+using Vega.Models;
+using Vega.Persistence;
 
-namespace vega.Controllers
+namespace Vega.Controllers
 {
     [Route("api/[controller]")]
     public class FeaturesController
