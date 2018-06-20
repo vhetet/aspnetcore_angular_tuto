@@ -2,6 +2,9 @@ using Vega.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using Vega.Core;
+using System.Collections.Generic;
+using vega.Core.Models;
+using System.Linq;
 
 namespace Vega.Persistence
 {
@@ -33,6 +36,21 @@ namespace Vega.Persistence
         public void Remove(Vehicle vehicle)
         {
             context.Vehicles.Remove(vehicle);
+        }
+
+        public async Task<IEnumerable<Vehicle>> GetVehicles(Filter filter)
+        {
+            var query =  context.Vehicles
+                .Include(v => v.Model)
+                    .ThenInclude(m => m.Make)
+                .Include(v => v.Features)
+                    .ThenInclude(vf => vf.Feature)
+                .AsQueryable();
+
+            if (filter.MakeId.HasValue)
+                query = query.Where(v => v.Model.MakeId == filter.MakeId);
+
+            return await query.ToListAsync();
         }
     }
 }
