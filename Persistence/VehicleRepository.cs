@@ -63,6 +63,8 @@ namespace Vega.Persistence
 
             query = IQueryableExtensions<Vehicle>.ApplyOrdering(query, queryObject, columnsMap);
 
+            query = IQueryableExtensions<Vehicle>.ApplyPaging(query, queryObject);
+
             return await query.ToListAsync();
         }
 
