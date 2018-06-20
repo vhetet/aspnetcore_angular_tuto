@@ -7,9 +7,8 @@ import { VehicleService } from "../services/vehicle.service";
 })
 export class VehicleListComponent implements OnInit {
     vehicles: any;
-    allVehicles: any;
     makes: any;
-    filter: any = {};
+    query: any = {};
 
     constructor(private vehicleService: VehicleService) { }
 
@@ -17,21 +16,31 @@ export class VehicleListComponent implements OnInit {
         this.vehicleService.getMakes()
             .subscribe(makes => this.makes = makes);
 
-        this.vehicleService.getVehicles()
-            .subscribe(vehicles => this.vehicles = this.allVehicles = vehicles);
+        this.populateVehicles();
     }
 
     onFilterChange() {
-        var vehicles = this.allVehicles;
-
-        if(this.filter.makeID)
-            vehicles = vehicles.filter(v => v.make.id == this.filter.makeID);
-
-        this.vehicles = vehicles;
+        this.populateVehicles();
     }
 
     resetFilter() {
-        this.filter = {};
+        this.query = {};
         this.onFilterChange();
+    }
+
+    private populateVehicles() {
+        this.vehicleService.getVehicles(this.query)
+            .subscribe(vehicles => this.vehicles = vehicles);
+    }
+
+    sortBy(columnName) {
+        if(this.query.sortBy === columnName) {
+            this.query.isSortAscending = !this.query.isSortAscending;
+        }
+        else {
+            this.query.sortBy = columnName
+            this.query.isSortAscending = true;
+        } 
+        this.populateVehicles();
     }
 }
